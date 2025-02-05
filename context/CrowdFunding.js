@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
 import Web3modal from "web3modal";
 import { ethers } from "ethers";
@@ -16,8 +16,9 @@ export const CrowdFundingContext = React.createContext();
 
 export const CrowdFundingProvider = ({ children }) => {
   const titleData = "CrowdFunding contract";
-  const [currentAccount, setCurrentaAccount] = useState("");
-
+  const [currentAccount, setCurrentAccount] = useState("");
+  const [openError, setOpenError] = useState(false);
+  const [error, setError] = useState("");
   const createCampaign = async (campaign) => {
     const { title, description, amount, deadline } = campaign;
     const web3modal = new Web3modal();
@@ -64,7 +65,7 @@ export const CrowdFundingProvider = ({ children }) => {
   const getUserCampaigns = async () => {
     const provider = new ethers.providers.JsonRpcProvider();
     const contract = await fetchContract(provider);
-    const allCampaigns = await getCampaign();
+    const allCampaigns = await contract.getCampaign();
 
     const accounts = await window.ethereum.request({ method: "eth_accounts" });
 
