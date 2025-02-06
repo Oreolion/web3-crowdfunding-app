@@ -15,6 +15,7 @@ const Hero = ({ titleData, createCampaign }) => {
     e.preventDefault();
     try {
       const data = await createCampaign(campaign);
+      console.log(data);
     } catch (error) {
       console.log(error);
     }
@@ -24,6 +25,7 @@ const Hero = ({ titleData, createCampaign }) => {
     <div className="relative">
       <span className="coverLine"></span>
       <Image
+        priority
         className="absolute object-cover"
         layout="fill"
         src="/images/pexels-pixabay-128867.jpg"
@@ -34,11 +36,11 @@ const Hero = ({ titleData, createCampaign }) => {
         <div className="relative px-4 py-16 mx-auto overflow-hidden sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
           <div className="flex flex-col items-center justify-between xl:flex-row">
             <div className="w-full max-w-xl mb-12 xl:mb-0 xl:pr-16 xl:w-7/12">
-              <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-800 sm:text-5xl sm:leading-none">
+              <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold tracking-tight text-gray-800 sm:text-6xl sm:leading-none">
                 Crypto King <br className="hidden md:block" />
                 Crowd Funding CK
               </h2>
-              <p className="max-w-xl mb-4 text-xl font-bold text-orange-600 md:text-lg">
+              <p className="max-w-xl mb-4 text-xl font-bold text-orange-600 md:text-2xl rounded-2xl bg-gray-400 p-3">
                 Create a web decentralized campaign and get funded by the
                 community for your Web3 projects.
               </p>
@@ -62,7 +64,7 @@ const Hero = ({ titleData, createCampaign }) => {
                       htmlFor="firstName"
                       className="inline-block mb-1 font-medium"
                     >
-                      First Name
+                      Title
                     </label>
                     <input
                       type="text"
@@ -72,16 +74,16 @@ const Hero = ({ titleData, createCampaign }) => {
                       placeholder="title"
                       required
                       className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-blue-accent-400 focus:outline-none focus:shadow-outline"
-                      id="firstName"
-                      name="firstName"
+                      id="title"
+                      name="title"
                     />
                   </div>
                   <div className="mb-1 sm:mb-2">
                     <label
-                      htmlFor="lastName"
+                      htmlFor="description"
                       className="inline-block mb-1 font-medium"
                     >
-                      Last Name
+                      Description
                     </label>
                     <input
                       type="text"
@@ -91,7 +93,7 @@ const Hero = ({ titleData, createCampaign }) => {
                           description: e.target.value,
                         });
                       }}
-                      placeholder="title"
+                      placeholder="description"
                       required
                       className="flex-grow w-full h-12 px-4 mb-2 transition duration-200 bg-white border border-gray-300 rounded shadow-sm appearance-none focus:border-deep-blue-accent-400 focus:outline-none focus:shadow-outline"
                       id="lastName"

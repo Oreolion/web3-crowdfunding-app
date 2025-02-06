@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useContext, use } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 //INTERNAL IMPORTS
 
@@ -19,8 +19,12 @@ export default function Home() {
   const [allCampaigns, setAllCampaigns] = useState([]);
   const [userCampaign, setUserCampaign] = useState();
   useEffect(() => {
-    const getCampaignsData = getCampaign();
+    const getCampaignsData =  getCampaign();
     const userCampaignsData = getUserCampaigns();
+
+    console.log(getCampaignsData);
+    console.log(getCampaignsData);
+    
     return async () => {
       const allData = await getCampaignsData;
       const userData = await userCampaignsData;
