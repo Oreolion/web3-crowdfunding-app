@@ -9,7 +9,7 @@ import { Hero, Card, PopUp } from "@/components/index";
 export default function Home() {
   const {
     titleData,
-    getCampaign,
+    getCampaigns,
     createCampaign,
     donate,
     getUserCampaigns,
@@ -19,12 +19,12 @@ export default function Home() {
   const [allCampaigns, setAllCampaigns] = useState([]);
   const [userCampaign, setUserCampaign] = useState();
   useEffect(() => {
-    const getCampaignsData =  getCampaign();
+    const getCampaignsData = getCampaigns();
     const userCampaignsData = getUserCampaigns();
 
     console.log(getCampaignsData);
     console.log(getCampaignsData);
-    
+
     return async () => {
       const allData = await getCampaignsData;
       const userData = await userCampaignsData;

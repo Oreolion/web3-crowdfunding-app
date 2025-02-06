@@ -11,7 +11,7 @@ to install ether.js library
 
 
 to start hardhat on a localhost port 8546
-`npx hardhat node --port 8546`
+`npx hardhat node --port 8545`
 
 to deploy smart contract to ethereum blockchain
 `npx hardhat run --network localhost scripts/deploy.js`
