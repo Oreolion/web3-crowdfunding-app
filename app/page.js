@@ -17,42 +17,52 @@ export default function Home() {
   } = useContext(CrowdFundingContext);
 
   const [allCampaigns, setAllCampaigns] = useState([]);
-  const [userCampaign, setUserCampaign] = useState();
+  const [userCampaign, setUserCampaign] = useState([]);
   useEffect(() => {
-    const getCampaignsData = getCampaigns();
-    const userCampaignsData = getUserCampaigns();
+    const fetchCampaigns = async () => {
+      try {
+        const allData = await getCampaigns();
+        const userData = await getUserCampaigns();
 
-    console.log(getCampaignsData);
-    console.log(getCampaignsData);
-
-    return async () => {
-      const allData = await getCampaignsData;
-      const userData = await userCampaignsData;
-      setAllCampaigns(allData);
-      setUserCampaign(userData);
+        setAllCampaigns(allData);
+        setUserCampaign(userData);
+      } catch (error) {
+        console.error("Error fetching campaigns:", error);
+      }
     };
-  }, []);
+
+    fetchCampaigns();
+  }, [getCampaigns, getUserCampaigns]);
+
 
   //   DONATE POPUP MODAL
   const [openModal, setOpenModal] = useState(false);
   const [donateCampaign, setDonateCampaign] = useState();
 
   return (
-    <div className="container">
+    <div className="">
       <Hero title={titleData} createCampaign={createCampaign} />
-      <Card
-        title="All Campaigns"
-        allcampaign={allCampaigns}
-        donate={donate}
-        setOpenModal={setOpenModal}
-        setDonate={setDonateCampaign}
-      />
-      <Card
-        title="Your created Campaigns"
-        allcampaign={userCampaign}
-        setOpenModal={setOpenModal}
-        setDonate={setDonateCampaign}
-      />
+      {allCampaigns.length > 0 ? (
+        <Card
+          title="All Campaigns"
+          allCampaigns={allCampaigns}
+          donate={donate}
+          setOpenModal={setOpenModal}
+          setDonate={setDonateCampaign}
+        />
+      ) : (
+        <p>Loading campaigns...</p>
+      )}
+      {userCampaign.length > 0 ? (
+        <Card
+          title="Your created Campaigns"
+          allCampaigns={userCampaign}
+          setOpenModal={setOpenModal}
+          setDonate={setDonateCampaign}
+        />
+      ) : (
+        <p className="text-center mx-auto p-4">No campaigns found.</p>
+      )}
 
       {openModal && (
         <PopUp

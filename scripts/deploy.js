@@ -1,19 +1,18 @@
-const hre = require("hardhat");
+import { ethers } from "hardhat";
 
 async function main() {
   // Get the contract factory
-  const CrowdFunding = await hre.ethers.getContractFactory("CrowdFunding");
+  const CrowdFunding = await ethers.getContractFactory("CrowdFunding");
   
   // Deploy the contract
   const crowdFunding = await CrowdFunding.deploy();
   
   // Wait for deployment to complete
-  await crowdFunding.waitForDeployment();
+  await crowdFunding.deploymentTransaction().wait();
 
   // Get the deployed contract address
-  const address = await crowdFunding.getAddress();
-  console.log("CrowdFunding deployed to:", address);
-  // address: 0x5FC8d32690cc91D4c39d9d3abcBD16989F875707
+  console.log("CrowdFunding deployed to:", crowdFunding.target);
+  // Example address: 0x5FbDB2315678afecb367f032d93F642f64180aa3
 }
 
 main()
